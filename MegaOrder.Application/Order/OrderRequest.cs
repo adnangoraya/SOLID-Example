@@ -2,7 +2,7 @@
 using MegaOrder.Domain.Payment;
 using MegaOrder.Domain.Shipping;
 
-namespace MegaOrder.Application;
+namespace MegaOrder.Application.Order;
 
 public sealed record OrderRequest(
     string Email,

@@ -1,19 +1,31 @@
 ﻿using MegaOrder.Application.Discount;
 using MegaOrder.Application.Shipping;
-using MegaOrder.Domain;
 using MegaOrder.Domain.Email;
 using MegaOrder.Domain.Payment;
 using MegaOrder.Domain.Store;
 using Microsoft.Extensions.Logging;
 
-namespace MegaOrder.Application;
+namespace MegaOrder.Application.Order;
 
-public sealed class MegaOrderService(
-    ILogger<MegaOrderService> _logger, 
-    IStore _store, 
-    IPaymentProcessor paymentProcessor, 
-    IEmailSender emailSender)
+public sealed class MegaOrderService
 {
+    private readonly ILogger<MegaOrderService> _logger;
+    private readonly IStore _store;
+    private readonly IPaymentProcessor _paymentProcessor;
+    private readonly IEmailSender _emailSender;
+    
+    public MegaOrderService(
+        ILogger<MegaOrderService> logger,
+        IStore store,
+        IPaymentProcessor paymentProcessor,
+        IEmailSender emailSender)
+    {
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _store = store ?? throw new ArgumentNullException(nameof(store));
+        _paymentProcessor = paymentProcessor ?? throw new ArgumentNullException(nameof(paymentProcessor));
+        _emailSender = emailSender ?? throw new ArgumentNullException(nameof(emailSender));
+    }
+
     public string PlaceOrder(OrderRequest request)
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
@@ -34,7 +46,7 @@ public sealed class MegaOrderService(
 
         decimal total = (subtotal - discount) + shippingCharges;
 
-        bool isPaymentProcessed = paymentProcessor.Process(total);
+        bool isPaymentProcessed = _paymentProcessor.Process(total);
 
         if (!isPaymentProcessed) 
         {
@@ -44,11 +56,11 @@ public sealed class MegaOrderService(
 
         string orderId = Guid.NewGuid().ToString("N");
 
-        Order order = new(orderId, request.Email, request.ProductSku, request.Quantity, total, TimeProvider.System.GetUtcNow());
+        Domain.Order order = new(orderId, request.Email, request.ProductSku, request.Quantity, total, TimeProvider.System.GetUtcNow());
 
         _store.Save(order);
 
-        emailSender.SendEmail(order);
+        _emailSender.SendEmail(order);
 
         _logger.LogInformation("Order {orderId} completed", orderId);
         return orderId;

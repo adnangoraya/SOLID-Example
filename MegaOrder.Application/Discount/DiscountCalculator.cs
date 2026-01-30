@@ -1,8 +1,9 @@
-﻿using MegaOrder.Domain.Discount;
+﻿using MegaOrder.Application.Order;
+using MegaOrder.Domain.Discount;
 
 namespace MegaOrder.Application.Discount;
 
-public class DiscountCalculator
+internal sealed class DiscountCalculator
 {
     private const decimal NoDiscount = 0;
 

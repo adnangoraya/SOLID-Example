@@ -3,7 +3,7 @@ using MegaOrder.Domain.Email;
 
 namespace MegaOrder.Infrastructure.Email;
 
-internal class EmailSender : IEmailSender
+internal class SmtpEmailer : IEmailSender
 {
     public void SendEmail(Order order)
     {

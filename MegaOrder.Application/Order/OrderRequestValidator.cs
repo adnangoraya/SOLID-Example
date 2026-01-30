@@ -1,6 +1,6 @@
-﻿namespace MegaOrder.Application;
+﻿namespace MegaOrder.Application.Order;
 
-internal class OrderRequestValidator
+internal sealed class OrderRequestValidator
 {
     internal static bool IsValid(OrderRequest request)
     {

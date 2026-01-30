@@ -1,8 +1,9 @@
-﻿using MegaOrder.Domain.Shipping;
+﻿using MegaOrder.Application.Order;
+using MegaOrder.Domain.Shipping;
 
 namespace MegaOrder.Application.Shipping;
 
-internal class ShippingChargesCalculator
+internal sealed class ShippingChargesCalculator
 {
     private const decimal DefaultShippingCharges = 5;
 

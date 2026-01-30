@@ -2,7 +2,7 @@
 
 namespace MegaOrder.Application.Payment;
 
-internal class CreditCardPaymentProcessor : IPaymentProcessor
+internal sealed class CreditCardPaymentProcessor : IPaymentProcessor
 {
     public bool Process(decimal amount) => amount > 0;
 }
