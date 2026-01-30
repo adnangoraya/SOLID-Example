@@ -1,7 +1,11 @@
 ## SOLID Violation Vs Implementation
 
-In this solution, You'll find an example without SOLID prinicples implemented and a version of same example with SOILD implementation.
+This solution contains two versions of the same example:
+one <b>without SOLID principles</b> applied, and another <b>with a proper SOLID-based</b> implementation.This solution contains two versions of the same example:
+one without SOLID principles applied, and another with a proper SOLID-based implementation.
 
-* Firstly, In Excercise folder, we have an example of voilations of SOLID principles. Please read Notes.md in the Excercise folder for better understanding.
-* Then, there is an implementation of that excerise which implements all SOLID principles. The implementation also splits Models, Services and interfaces etc into correct application layer.
-* [Note] There is no link between the project resides in Excercise folder and the implementation on the root.
+In the <b>Exercise</b> folder, you’ll find an example that deliberately demonstrates <b>violations of SOLID principles</b>. Please refer to the `Notes.md` file inside the Exercise folder for a detailed explanation of the issues and design problems.
+
+At the root of the solution, you’ll find a <b>refactored implementation</b> of the same exercise that <b>fully applies all SOLID principles</b>. This version also clearly separates <b>models, services, and interfaces</b> into their appropriate application layers, following clean architecture practices.
+
+Note: There is <b>no direct linkage</b> between the project in the Exercise folder and the SOLID implementation at the root. They are intentionally kept separate for clarity and comparison purposes.
