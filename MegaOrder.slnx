@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Excercise/">
+    <Project Path="../SOLID/SOLID/6AllSolidPrinciplesExercise/6.Exercise.csproj" />
+    <Project Path="../SOLID/SOLID/SharedModels/SharedModels.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Readme.md" />
+  </Folder>
+  <Project Path="MegaOrder.Application/MegaOrder.Application.csproj" />
+  <Project Path="MegaOrder.Domain/MegaOrder.Domain.csproj" Id="94fd138a-552c-46f5-b4d0-50f276f1e803" />
+  <Project Path="MegaOrder.Infrastructure/MegaOrder.Infrastructure.csproj" Id="ba06462b-2012-4b27-9514-a5a03a8d3b40" />
+</Solution>
