@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/Excercise/">
-    <Project Path="../SOLID/SOLID/6AllSolidPrinciplesExercise/6.Exercise.csproj" />
-    <Project Path="../SOLID/SOLID/SharedModels/SharedModels.csproj" />
+    <Project Path="Excercise/6.Exercise/6.Exercise.csproj" Id="329d1c73-c6a5-4142-bec4-00b2856fb076" />
+    <Project Path="Excercise/SharedModels/SharedModels.csproj" Id="0b1f618c-3a25-4e80-abae-c93aed613c09" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path="Readme.md" />
