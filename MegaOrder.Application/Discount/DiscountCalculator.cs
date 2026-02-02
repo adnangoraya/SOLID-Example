@@ -3,7 +3,7 @@ using MegaOrder.Domain.Discount;
 
 namespace MegaOrder.Application.Discount;
 
-internal sealed class DiscountCalculator
+public class DiscountCalculator
 {
     private const decimal NoDiscount = 0;
 
@@ -14,7 +14,7 @@ internal sealed class DiscountCalculator
         { DiscountCode.Seasonal, 0.10m }
     };
 
-    internal static decimal Calculate(OrderRequest request)
+    internal virtual decimal Calculate(OrderRequest request)
     {
         if (_availableDiscounts.TryGetValue(request.DiscountCode, out decimal discountValue))
         {

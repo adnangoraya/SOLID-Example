@@ -1,5 +1,4 @@
-﻿using MegaOrder.Application.Discount;
-using MegaOrder.Application.Shipping;
+﻿using MegaOrder.Application.Payment;
 using MegaOrder.Domain.Email;
 using MegaOrder.Domain.Payment;
 using MegaOrder.Domain.Store;
@@ -11,19 +10,22 @@ public sealed class MegaOrderService
 {
     private readonly ILogger<MegaOrderService> _logger;
     private readonly IStore _store;
-    private readonly IPaymentProcessor _paymentProcessor;
+    private readonly IPaymentProcessorFactory _paymentProcessorFactory;
     private readonly IEmailSender _emailSender;
-    
+    private readonly OrderCalculator _orderCalculator;
+
     public MegaOrderService(
         ILogger<MegaOrderService> logger,
         IStore store,
-        IPaymentProcessor paymentProcessor,
-        IEmailSender emailSender)
+        IPaymentProcessorFactory paymentProcessor,
+        IEmailSender emailSender,
+        OrderCalculator orderCalculator)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _store = store ?? throw new ArgumentNullException(nameof(store));
-        _paymentProcessor = paymentProcessor ?? throw new ArgumentNullException(nameof(paymentProcessor));
+        _paymentProcessorFactory = paymentProcessor ?? throw new ArgumentNullException(nameof(paymentProcessor));
         _emailSender = emailSender ?? throw new ArgumentNullException(nameof(emailSender));
+        _orderCalculator = orderCalculator ?? throw new ArgumentNullException(nameof(orderCalculator));
     }
 
     public string PlaceOrder(OrderRequest request)
@@ -38,15 +40,11 @@ public sealed class MegaOrderService
             throw new ArgumentException("Invalid order request.");
         }
 
-        decimal discount = DiscountCalculator.Calculate(request);
+        decimal total = _orderCalculator.CalculateTotal(request);
 
-        decimal shippingCharges = ShippingChargesCalculator.Calculate(request);
+        IPaymentProcessor paymentProcessor = _paymentProcessorFactory.Create(request.PaymentMethod);
 
-        decimal subtotal = request.UnitPrice * request.Quantity;
-
-        decimal total = (subtotal - discount) + shippingCharges;
-
-        bool isPaymentProcessed = _paymentProcessor.Process(total);
+        bool isPaymentProcessed = paymentProcessor.Process(total);
 
         if (!isPaymentProcessed) 
         {

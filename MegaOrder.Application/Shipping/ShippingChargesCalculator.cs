@@ -3,7 +3,7 @@ using MegaOrder.Domain.Shipping;
 
 namespace MegaOrder.Application.Shipping;
 
-internal sealed class ShippingChargesCalculator
+public class ShippingChargesCalculator
 {
     private const decimal DefaultShippingCharges = 5;
 
@@ -13,7 +13,7 @@ internal sealed class ShippingChargesCalculator
         { ShippingSpeed.Express, 15 }
     };
 
-    internal static decimal Calculate(OrderRequest request)
+    internal virtual decimal Calculate(OrderRequest request)
     {
         if (_availableShippingMethods.TryGetValue(request.ShippingSpeed, out decimal shippingCharges))
         {
