@@ -1,7 +1,7 @@
 ## SOLID Violation Vs Implementation
 
 This solution contains two versions of the same example:
-one <b>without SOLID principles</b> applied, and another <b>with a proper SOLID-based</b> implementation.This solution contains two versions of the same example:
+one <b>without SOLID principles</b> applied, and another <b>with a proper SOLID-based</b> implementation. This solution contains two versions of the same example:
 one without SOLID principles applied, and another with a proper SOLID-based implementation.
 
 In the <b>Exercise</b> folder, you’ll find an example that deliberately demonstrates <b>violations of SOLID principles</b>. Please refer to the `Notes.md` file inside the Exercise folder for a detailed explanation of the issues and design problems.
